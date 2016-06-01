@@ -9,13 +9,11 @@ public class MemberController {
 	
 	@RequestMapping("login")
 	public String login(){
-		System.out.println("오냐?");
 		return "/member/login";
 	}
 	
 	@RequestMapping("join")
 	public String join(){
-		System.out.println("오냐?");
 		return "/member/join";
 	}
 }

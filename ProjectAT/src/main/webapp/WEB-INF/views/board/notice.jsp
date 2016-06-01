@@ -3,18 +3,19 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="tableArea">
 <h1>공지사항</h1>
-	<div id="currPageTotalPage">
-		${requestScope.pageNation.currPage}/ ${requestScope.pageNation.totalPages} 
-	</div>
 	
+		<div id="currPageTotalPage">
+			${requestScope.pageNation.currPage}/ ${requestScope.pageNation.totalPages} 
+		</div>
 		<table class="table table-striped table-bordered table-hover">
-		<tr>
-			<th class="num warning" >NO</th> 
-			<th class="title warning">제목</th> 
-			<th class="userid warning" >작성자</th> 
-			<th class="wDate warning">날짜</th>
-		</tr>
-		
+		<thead>
+			<tr>
+				<th style="text-align: center;" class="num">NO</th> 
+				<th style="text-align: center;" class="title">제목</th> 
+				<th style="text-align: center;" class="userid" >작성자</th> 
+				<th style="text-align: center;" class="wDate">날짜</th>
+			</tr>
+		</thead>
 		<c:forEach var="items" items="${requestScope.boardList}" varStatus="status">
 		<tr>
 			<td class="num">${items.num}</td>
@@ -25,6 +26,9 @@
 		</c:forEach>
 		
 		</table>
+	<div id="btnArea">
+		<button id="write" class="next btn btn-primary " type="button">글쓰기</button>
+	</div>	
 	<div class="navArea">
 	<nav>
 	  	<ul class="pagination">
@@ -84,7 +88,5 @@
 	  </ul>
 	</nav>
 	</div>
-	<div id="btnArea">
-		<button id="write" class="next btn btn-default " type="button">글쓰기</button>
-	</div>
+	
 	</div>

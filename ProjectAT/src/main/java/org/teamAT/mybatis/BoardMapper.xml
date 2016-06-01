@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.teamAT.dao.BoardDao"> <!--??sql 臾몄옣怨?留ㅽ븨???명꽣?섏씠?ㅼ쓽 ?꾩쟾??寃쎈줈-->
+    
+    <!-- <insert id="insert" parameterType="org.kdea.mybatis.board.BoardVO">
+        insert into board (num, author, title, contents, wdate, ref) 
+        	values (board_num_seq.NEXTVAL, #{author}, #{title}, #{contents}, sysdate, 0 )
+    </insert>
+    <select id="getContent" resultType="org.kdea.mybatis.board.BoardVO">
+    	SELECT NUM, AUTHOR, TITLE, CONTENTS, WDATE, REF FROM BOARD 
+            	WHERE num=(select max(num) FROM BOARD where AUTHOR=#{author})
+    </select>
+    <select id="getCurrentContent" resultType="org.kdea.mybatis.board.BoardVO">
+    	SELECT NUM, AUTHOR, TITLE, CONTENTS, WDATE, REF FROM BOARD WHERE num=#{num}
+    </select>
+    <update id="update" parameterType="org.kdea.mybatis.board.BoardVO">
+        UPDATE BOARD SET TITLE=#{title}, CONTENTS=#{contents} WHERE NUM=#{num}
+    </update> -->
+    <select id="getList" resultType="org.teamAT.vo.BoardVo">
+    	SELECT * FROM(
+		  SELECT TRUNC((RN-1)/10+1) AS page, CEIL(COUNT(*) OVER()/10) AS TotalPage,t2.* FROM(
+		    SELECT ROWNUM RN, t1.* FROM(
+		      SELECT NUM, LPAD('.', (level-1)*4,' ')|| TITLE AS TITLE, USERID, WDATE 
+		      FROM NOTICE 
+		      START WITH REF=0 CONNECT BY PRIOR NUM=REF 
+		      ORDER SIBLINGS BY num DESC 
+		    )t1 
+		  )t2 
+		)WHERE page=#{page}
+    </select>
+    <!-- <delete id="delete" >
+        delete from board where num=#{num}
+    </delete>  -->
+ </mapper>

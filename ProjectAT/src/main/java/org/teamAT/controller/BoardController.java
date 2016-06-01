@@ -15,13 +15,7 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 	
-	@RequestMapping("notice")
-    public String viewNotice(){
-		System.out.println("notice");
-		return "/board/notice";
-	}
-	
-	@RequestMapping(value="list", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="noticelist", method = RequestMethod.GET)
 	public String getList(HttpServletRequest request){
 		service.getList(request);
 		return "/board/notice";

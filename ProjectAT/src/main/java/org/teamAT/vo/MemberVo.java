@@ -9,7 +9,6 @@ public class MemberVo {
 	private String username;
 	private int phone;
 	private Date birthday;
-	private String hint;
 	private boolean emailcheck;
 	private int educlass;
 	private String grade;
@@ -43,12 +42,6 @@ public class MemberVo {
 	}
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
-	}
-	public String getHint() {
-		return hint;
-	}
-	public void setHint(String hint) {
-		this.hint = hint;
 	}
 	public boolean isEmailcheck() {
 		return emailcheck;

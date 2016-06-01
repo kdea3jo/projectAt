@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/member/")
 public class MemberController {
 	
-	@RequestMapping("login")
-	public String login(){
+	@RequestMapping("loginform")
+	public String viewLoginForm(){
 		return "/member/login";
 	}
 	
-	@RequestMapping("join")
+	@RequestMapping("joinform")
 	public String join(){
 		return "/member/join";
 	}

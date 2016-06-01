@@ -1,6 +1,7 @@
 package org.teamAT.vo;
 
 public class PageVo {
+	
 	private int totalPages;
 	private int currPage;
 	private boolean leftMore;

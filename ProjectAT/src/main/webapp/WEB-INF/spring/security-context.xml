@@ -44,9 +44,9 @@
             login-processing-url="/check"
             username-parameter="id"
             password-parameter="pw"
-            default-target-url="/index"
-            authentication-failure-url="/index?error=true" />
-        <logout logout-success-url="/index" />
+            default-target-url="/member/loginform"
+            authentication-failure-url="/member/loginform?error=true" />
+        <logout logout-success-url="/member/loginform" />
         <csrf disabled="true"/>
     </http>
        

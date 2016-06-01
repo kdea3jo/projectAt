@@ -3,55 +3,56 @@ package org.teamAT.vo;
 import java.sql.Date;
 
 public class BoardVo {
+	
 	private int num;
 	private String userid;
 	private String title;
-	private String contents;
+	private String content;
 	private Date wDate;
 	private int ref;
-	private int Totalpage;
+	private int totalpage;
+	
 	public int getNum() {
 		return num;
-	}
-	public String getUserid() {
-		return userid;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public String getContents() {
-		return contents;
-	}
-	public Date getwDate() {
-		return wDate;
-	}
-	public int getRef() {
-		return ref;
-	}
-	public int getTotalpage() {
-		return Totalpage;
 	}
 	public void setNum(int num) {
 		this.num = num;
 	}
+	public String getUserid() {
+		return userid;
+	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	public String getTitle() {
+		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public Date getwDate() {
+		return wDate;
 	}
 	public void setwDate(Date wDate) {
 		this.wDate = wDate;
 	}
+	public int getRef() {
+		return ref;
+	}
 	public void setRef(int ref) {
 		this.ref = ref;
 	}
-	public void setTotalpage(int totalpage) {
-		Totalpage = totalpage;
+	public int getTotalpage() {
+		return totalpage;
 	}
-	
-	
+	public void setTotalpage(int totalpage) {
+		this.totalpage = totalpage;
+	}
+
 }

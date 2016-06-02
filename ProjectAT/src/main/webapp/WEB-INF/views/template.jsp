@@ -4,7 +4,7 @@
 <html>
     <head>
     <meta charset="UTF-8">
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
     <style type="text/css">
     	* {margin: 0}
 		html, body {height: 100%;}

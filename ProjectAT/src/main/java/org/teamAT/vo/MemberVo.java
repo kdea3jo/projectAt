@@ -9,7 +9,6 @@ public class MemberVo {
 	private String username;
 	private int phone;
 	private Date birthday;
-	private boolean emailcheck;
 	private int educlass;
 	private String grade;
 	
@@ -42,12 +41,6 @@ public class MemberVo {
 	}
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
-	}
-	public boolean isEmailcheck() {
-		return emailcheck;
-	}
-	public void setEmailcheck(boolean emailcheck) {
-		this.emailcheck = emailcheck;
 	}
 	public int getEduclass() {
 		return educlass;

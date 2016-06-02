@@ -13,7 +13,7 @@
 		#content{vertical-align: middle}
 		.footer, .push {height: 3em;}
 		.footer{background-color: #D5D5D5;}
-		.tableArea{width: 70%;margin: 0px auto;}
+		.tableArea{width: 60%;margin: 0px auto;}
     	#btnArea, #currPageTotalPage{margin: 10px auto;text-align: right;}
       	.navArea{margin: 0px auto;text-align: center;}
     </style>

@@ -10,18 +10,18 @@
 		<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
-				<th style="text-align: center;" class="num">NO</th> 
-				<th style="text-align: center;" class="title">제목</th> 
-				<th style="text-align: center;" class="userid" >작성자</th> 
-				<th style="text-align: center;" class="wDate">날짜</th>
+				<th class="num col-xs-1 text-center">NO</th> 
+				<th class="title col-xs-6 text-center">제목</th> 
+				<th class="userid col-xs-2 text-center" >작성자</th> 
+				<th class="wDate col-xs-3 text-center">날짜</th>
 			</tr>
 		</thead>
 		<c:forEach var="items" items="${requestScope.boardList}" varStatus="status">
 		<tr>
-			<td class="num">${items.num}</td>
-			<td class="title"><a href="../board/read?num=${items.num}">${items.title}</a></td>
-			<td class="userid">${items.userid}</td>
-			<td class="wDate">${items.wDate}</td>
+			<td class="num col-xs-1 text-center">${items.num}</td>
+			<td class="title col-xs-6"><a href="../board/read?num=${items.num}">${items.title}</a></td>
+			<td class="userid col-xs-2 text-center">${items.userid}</td>
+			<td class="wDate col-xs-3 text-center">${items.wDate}</td>
 	    </tr>
 		</c:forEach>
 		
@@ -31,7 +31,7 @@
 	</div>	
 	<div class="navArea">
 	<nav>
-	  	<ul class="pagination">
+	  	<ul class="pagination" style="margin-top: 0px">
 	  	<!-- 이전 -->
 	  	<c:choose>
 		    <c:when test="${requestScope.pageNation.leftMore==true}">
@@ -88,5 +88,22 @@
 	  </ul>
 	</nav>
 	</div>
-	
+	<div class="form-group">
+		<form>
+			<div class="col-xs-2"></div>
+			<div class="col-xs-2" style="padding-right: 10px;padding-left: 10px;">
+				<select class="form-control" >
+				  <option>제목</option>
+				  <option>내용</option>
+				  <option>글번호</option>
+				  <option>글쓴이</option>
+				</select>
+			</div>
+			<div class="col-xs-4" style="padding-right: 10px;padding-left: 10px;">
+				<label hidden="visibility:hidden" class="control-label" for="search">검색</label>
+				<input id ="search" type="text" class="form-control col-xs-3" placeholder="검색어를 입력하세요">
+			</div>
+			<div class="col-xs-2" style="padding-right: 10px;padding-left: 10px;"><button id="search" class="next btn btn-primary" type="button">검색</button></div>
+		</form>
+	</div>
 	</div>

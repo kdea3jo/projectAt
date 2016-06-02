@@ -13,15 +13,15 @@
 		#content{vertical-align: middle}
 		.footer, .push {height: 3em;}
 		.footer{background-color: #D5D5D5;}
-		.tableArea{width: 60%;margin: 0px auto;}
+		.tableArea, .writeFormArea{width: 60%;margin: 0px auto;}
     	#btnArea, #currPageTotalPage{margin: 10px auto;text-align: right;}
       	.navArea{margin: 0px auto;text-align: center;}
     </style>
  	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-</head>
+	<title><tiles:insertAttribute name="title"></tiles:insertAttribute> </title>
+	</head>
 <body>
 	<div class="wrapper">
 		<div id="header">

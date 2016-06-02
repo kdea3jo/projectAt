@@ -11,7 +11,15 @@ public class BoardVo {
 	private Date wDate;
 	private int ref;
 	private int totalpage;
+	private int hit;
 	
+	
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 	public int getNum() {
 		return num;
 	}

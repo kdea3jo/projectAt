@@ -14,7 +14,7 @@
 		
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="../board/noticelist">공지사항</a></li>
+				<li><a href="../board/noticeList">공지사항</a></li>
 				<li><a href="#about">강좌</a></li>
 				<li><a href="#contact">취업정보</a></li>
 				<li><a href="#contact">Q&A</a></li>

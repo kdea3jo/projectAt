@@ -16,7 +16,7 @@ public class BoardService {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public void getList(HttpServletRequest request) {
+	public void getList(HttpServletRequest request, String boardname) {
 			BoardDao dao = sqlSessionTemplate.getMapper(BoardDao.class);
 			
 			String sPage = request.getParameter("pg");
@@ -27,7 +27,7 @@ public class BoardService {
 			int rowsPerScreen = 10;
 			int linksPerScreen = 5;
 			
-			List<BoardVo> list = dao.getList(page);
+			List<BoardVo> list = dao.getList(page,boardname);
 			
 			PageVo pagination = new PageVo();
 			int totalpage = list.get(0).getTotalpage();
@@ -43,7 +43,13 @@ public class BoardService {
 			pagination.setLinkBegin(linkBegin);
 			pagination.setLinkEnd(linkEnd);
 			request.setAttribute("pageNation", pagination);
-			request.setAttribute("boardList", dao.getList(page));
+			request.setAttribute("boardList", dao.getList(page, boardname));
+	}
+
+	public void getContent(HttpServletRequest request, String boardName) {
+		BoardDao dao = sqlSessionTemplate.getMapper(BoardDao.class);
+		int num = Integer.parseInt(request.getParameter("num"));
+		request.setAttribute("content", dao.getContent(num, boardName));
 	}
 
 }

@@ -1,16 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/* 목록 버튼 */
+		$("#cancel").on("click", function() {
+			location.href = "list";
+		});
+		/* 등록 버튼 */
+		$("#ok").on("click", function() {
+			var data=$("#inputForm").serialize();
+			var url = "../${requestScope.boardname}/insert";
+            $.ajax({
+                type:"post",
+                url:url,
+                data: data,
+                dataType:"json",
+                success:function(obj){
+                    location.href="read?num="+obj;
+                },
+                error:function(xhr,status,error){
+                    console.log('실패: '+error);
+                },
+                complete:function(data){
+                    
+                }
+            });
+		});
+		
+	});
+</script>
 <div class="writeFormArea">
 	<h1>글쓰기</h1>
-	<form>
-	  <div class="form-group">
-	    <label for="title">제목</label>
-	    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요.">
-	  </div>
-	  <div class="form-group">
-	    <label for="content">내용</label>
-	    <textarea class="form-control" rows="25"></textarea>
-	  </div>
-	  <div id="btnArea"> <button type="button" class="btn btn-success">등록</button></div>
+	<form id="inputForm">
+		<div class="form-group">
+			<label for="title">제목</label> 
+			<input name="title" type="text" class="form-control" id="title" placeholder="제목을 입력하세요."></input>
+			<input name="ref" type="text" class="sr-only" value="0"></input>
+		</div>
+		<div class="form-group">
+			<label for="content">내용</label>
+			<textarea name="content" class="form-control" rows="25"></textarea>
+		</div>
+		<div id="btnArea">
+			<button id="ok" type="button" class="btn btn-success">등록</button>
+			<button id="cancel" type="button" class="btn btn-success">취소</button>
+		</div>
 	</form>
 </div>

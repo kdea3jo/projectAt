@@ -1,15 +1,18 @@
 package org.teamAT.controller;
 
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.teamAT.service.BoardService;
+import org.teamAT.vo.BoardVo;
+import org.teamAT.vo.SearchVo;
 
 @Controller
 @RequestMapping("/board/")
@@ -27,17 +30,52 @@ public class BoardController {
 	@RequestMapping(value="*/read", method = RequestMethod.GET)
 	public String getContent(HttpServletRequest request){
 		service.getContent(request,getBoardName(request));
+		request.setAttribute("boardname", getBoardName(request));
 		return "/board/"+getBoardName(request)+"/read";
 	}
 	
-	@RequestMapping(value="notice/write", method = RequestMethod.GET)
-	public String noticeInsert(HttpServletRequest request){
-		return "/board/e";
+	@RequestMapping(value="*/write", method = RequestMethod.GET)
+	public String write(HttpServletRequest request){
+		request.setAttribute("boardname", getBoardName(request));
+		return "/board/"+getBoardName(request)+"/write";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="*/insert", method=RequestMethod.POST)
+	public int insert(BoardVo board, HttpServletRequest request){
+		service.insert(board,getBoardName(request));
+		return service.getCurrentContent(board,getBoardName(request)).getNum();
+	}
+	
+	@RequestMapping(value="*/modify", method = RequestMethod.GET)
+	public String modify(HttpServletRequest request){
+		request.setAttribute("boardname", getBoardName(request));
+		service.getContent(request,getBoardName(request));
+		return "/board/"+getBoardName(request)+"/update";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="*/update", method=RequestMethod.POST)
+	public boolean update(BoardVo board, HttpServletRequest request){
+		return service.update(board,getBoardName(request));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="*/delete", method=RequestMethod.POST)
+	public boolean delete(BoardVo board, HttpServletRequest request){
+		return service.delete(board,getBoardName(request));
+	}
+	
+	@RequestMapping(value="*/search", method = RequestMethod.GET)
+	public String search(HttpServletRequest request){
+		
+		service.search(request,getBoardName(request));
+		request.setAttribute("boardname", getBoardName(request));
+		return "/board/"+getBoardName(request)+"/list";
 	}
 	
 	public String getBoardName(HttpServletRequest request){
 		String[] temp = request.getRequestURI().split("/");
-		System.out.println(temp[3]);
 		return temp[3];
 	}
 	

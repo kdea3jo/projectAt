@@ -19,7 +19,7 @@
 		});
 	</script>
 <div class="tableArea">
-	<h1>게시판</h1>
+	<h1>${requestScope.boardname}</h1>
 
 	<div id="currPageTotalPage">${requestScope.pageNation.currPage}/
 		${requestScope.pageNation.totalPages}</div>

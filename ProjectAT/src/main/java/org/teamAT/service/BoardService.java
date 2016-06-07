@@ -28,9 +28,11 @@ public class BoardService {
 			int linksPerScreen = 5;
 			
 			List<BoardVo> list = dao.getList(page,boardname);
-			
 			PageVo pagination = new PageVo();
-			int totalpage = list.get(0).getTotalpage();
+			int totalpage=0;
+			if(list.size()!=0){
+				totalpage = list.get(0).getTotalpage();
+		    }
 			int linkGroup = (page-1)/linksPerScreen+1;
 			int linkEnd = linkGroup*linksPerScreen;
 			int linkBegin = linkEnd-linksPerScreen+1;

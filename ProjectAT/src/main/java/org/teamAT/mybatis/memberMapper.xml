@@ -9,4 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="setMember" parameterType="org.teamAT.vo.MemberVo">
     	insert into member(userid,userpw,username,phone,birthday) values(#{userid},#{userpw},#{username},#{phone},#{birthday})
     </insert>
+    <select id="getPassword" resultType="String">
+        select userpw from member where userid=#{id}
+    </select>
 </mapper>

@@ -11,6 +11,10 @@
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
 	</definition>
 	
+	<definition name="main" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+	</definition>
+	
 	<definition name="/board/*/*" extends="template">
 		<put-attribute name="title" value="{1}/{2}"/> 
 		<put-attribute name="body" value="/WEB-INF/views/board/{2}.jsp" />

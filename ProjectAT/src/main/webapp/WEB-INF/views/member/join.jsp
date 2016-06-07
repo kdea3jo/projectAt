@@ -19,7 +19,6 @@
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 }
 </style>
-sdfsdf
 <script type="text/javascript">
 	
 	$(document).ready(function() {

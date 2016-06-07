@@ -42,6 +42,7 @@ public class MemberService {
 		SimpleDateFormat date=new SimpleDateFormat("yy-MM-dd");
 		Date d=date.parse(request.getParameter("birthday"));
 		vo.setBirthday(d);
+		vo.setGrade("member");
 		
 		int result=dao.setMember(vo);
 		

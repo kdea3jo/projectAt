@@ -47,9 +47,9 @@ input{
 		<h3 class="form-signin-heading">크기가 전부는 아니잖아요.</h3>
 		<input type="text" class="input-block-level" name="id" placeholder="이메일을 입력하세요.">
 		<input type="password" class="input-block-level" name="pw" placeholder="비밀번호를 입력하세요.">
-		<a href="#" class="text-primary"><h6>로그인에 어려움이 있으신가요?</h6></a><br><br>
+		<h6><a href="#" class="text-primary">로그인에 어려움이 있으신가요?</a></h6><br><br>
 		<button class="btn btn-block btn-success" type="submit" >로그인</button>
-		<a href="#" class="text-primary"><h6>아직 회원이 아니시라면 지금 가입하세요.</h6></a>
+		<h6><a href="#" class="text-primary">아직 회원이 아니시라면 지금 가입하세요.</a></h6>
 	</form>
 	<c:if test="${param.error==true }">
     	<p id="err"><strong>사용자 계정이 잘못되었습니다.</strong></p>

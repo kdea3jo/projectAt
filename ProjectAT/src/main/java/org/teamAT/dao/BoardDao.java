@@ -10,7 +10,7 @@ import org.teamAT.vo.SearchVo;
 
 @Repository
 public interface BoardDao {
-	public List<BoardVo> getList(@Param("page") int page,@Param("boardname") String boardname);
+	public List<BoardVo> getList(@Param("page") int page,@Param("boardname") String boardname, @Param("search") SearchVo search);
 	public BoardVo getContent(@Param("num") int num,@Param("boardname") String boardname);
 	
 	public boolean insert(@Param("board") BoardVo board,@Param("boardname") String boardname);

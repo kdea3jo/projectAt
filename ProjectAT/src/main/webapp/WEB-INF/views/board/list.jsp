@@ -14,12 +14,19 @@
 				var type = $("#searchForm div select").val();
 				var keyword = $("#searchForm div input").val();
 				
-				location.href="search?type="+type+"&keyword="+keyword;
+				location.href="list?type="+type+"&keyword="+keyword;
 			});
 		});
 	</script>
 <div class="tableArea">
-	<h1>${requestScope.boardname}</h1>
+	<h1>
+	<c:choose>
+		<c:when test="${requestScope.boardname=='notice'}">공지사항</c:when>
+		<c:when test="${requestScope.boardname=='qna'}">Q&A</c:when>
+		<c:when test="${requestScope.boardname=='jobinfo'}">취업정보</c:when>
+		<c:otherwise></c:otherwise>
+	</c:choose>
+	</h1>
 
 	<div id="currPageTotalPage">${requestScope.pageNation.currPage}/
 		${requestScope.pageNation.totalPages}</div>
@@ -57,7 +64,7 @@
 				<c:choose>
 					<c:when test="${requestScope.pageNation.leftMore==true}">
 						<li class="page-item"><a class="page-link"
-							href="../${requestScope.boardname}/list?pg=${requestScope.pageNation.linkBegin-1}"
+							href="../${requestScope.boardname}/list?pg=${requestScope.pageNation.linkBegin-1}&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}"
 							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								<span class="sr-only">Previous</span>
 						</a></li>
@@ -75,14 +82,14 @@
 					end="${requestScope.pageNation.linkEnd}">
 					<c:choose>
 						<c:when test="${requestScope.pageNation.currPage==i}">
-							<li class="page-item active"><a class="page-link"
-								href="../${requestScope.boardname}/list?pg=${i}">${i}<span
+							<li class="page-item active">
+							<a class="page-link" href="../${requestScope.boardname}/list?pg=${i}&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}">${i}<span
 									class="sr-only">(current)</span></a></li>
 						</c:when>
 
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="../${requestScope.boardname}/list?pg=${i}">${i}</a></li>
+								href="../${requestScope.boardname}/list?pg=${i}&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}">${i}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -90,7 +97,7 @@
 				<c:choose>
 					<c:when test="${requestScope.pageNation.rightMore==true}">
 						<li class="page-item"><a class="page-link"
-							href="../${requestScope.boardname}/list?pg=${requestScope.pageNation.linkEnd+1}"
+							href="../${requestScope.boardname}/list?pg=${requestScope.pageNation.linkEnd+1}&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}"
 							aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 								class="sr-only">Next</span>
 						</a></li>
@@ -108,10 +115,10 @@
 	<form id="searchForm" class="form-inline text-center">
 		<div class="form-group">
 			<select name="type" class="form-control">
-				<option>제목</option>
-				<option>내용</option>
-				<option>글번호</option>
-				<option>글쓴이</option>
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+				<option value="num">글번호</option>
+				<option value="userid">글쓴이</option>
 			</select>
 		</div>
 		<div class="form-group">

@@ -24,10 +24,15 @@ public class BoardService {
 			if(sPage==null || sPage.equals("")) page=1;
 			else page = Integer.parseInt(sPage);
 			
+			SearchVo search = new SearchVo();
+			search.setType(request.getParameter("type"));
+			
+			search.setKeyword(request.getParameter("keyword"));
+			
 			int rowsPerScreen = 10;
 			int linksPerScreen = 5;
 			
-			List<BoardVo> list = dao.getList(page,boardname);
+			List<BoardVo> list = dao.getList(page,boardname, search);
 			PageVo pagination = new PageVo();
 			int totalpage=0;
 			if(list.size()!=0){
@@ -45,7 +50,8 @@ public class BoardService {
 			pagination.setLinkBegin(linkBegin);
 			pagination.setLinkEnd(linkEnd);
 			request.setAttribute("pageNation", pagination);
-			request.setAttribute("boardList", dao.getList(page, boardname));
+			request.setAttribute("boardList", dao.getList(page, boardname, search));
+			request.setAttribute("search", search);
 	}
 
 	public void getContent(HttpServletRequest request, String boardName) {

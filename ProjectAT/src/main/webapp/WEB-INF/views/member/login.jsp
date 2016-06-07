@@ -41,7 +41,7 @@ input{
 }
 
 </style>
-
+logintest
 <div class="container">
 	<form class="form-signin" action="<c:url value='/check'/>" method="post">
 		<h3 class="form-signin-heading">크기가 전부는 아니잖아요.</h3>

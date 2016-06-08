@@ -38,6 +38,7 @@
 			<label for="title">제목</label> 
 			<input name="title" type="text" class="form-control" id="title" placeholder="제목을 입력하세요."></input>
 			<input name="ref" type="text" class="sr-only" value="0"></input>
+			<input name="userid" type="text" class="sr-only" value="${sessionScope.id}"></input>
 		</div>
 		<div class="form-group">
 			<label for="content">내용</label>

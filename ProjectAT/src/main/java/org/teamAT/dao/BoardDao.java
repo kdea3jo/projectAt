@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import org.teamAT.vo.BoardVo;
+import org.teamAT.vo.CommentVo;
 import org.teamAT.vo.SearchVo;
 
 
@@ -19,5 +20,7 @@ public interface BoardDao {
 	
 	public boolean delete(@Param("num") int num,@Param("boardname") String boardname);
 	public List<BoardVo> search(@Param("page") int page,@Param("search") SearchVo search, @Param("boardname") String boardname);
+	public boolean commentInsert(@Param("comment") CommentVo comment, @Param("boardname") String boardname);
+	public List<CommentVo> commentList(@Param("num") int num,@Param("boardname") String boardname,@Param("page") int page);
 }
 

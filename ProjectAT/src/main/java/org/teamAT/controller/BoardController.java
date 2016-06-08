@@ -5,14 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.teamAT.service.BoardService;
 import org.teamAT.vo.BoardVo;
-import org.teamAT.vo.SearchVo;
+import org.teamAT.vo.CommentVo;
 
 @Controller
 @RequestMapping("/board/")
@@ -66,12 +64,12 @@ public class BoardController {
 		return service.delete(board,getBoardName(request));
 	}
 	
-	@RequestMapping(value="*/search", method = RequestMethod.GET)
-	public String search(HttpServletRequest request){
-		
-		service.search(request,getBoardName(request));
-		request.setAttribute("boardname", getBoardName(request));
-		return "/board/"+getBoardName(request)+"/list";
+	
+	@RequestMapping(value="*/comment", method = RequestMethod.POST)
+	public String commentInsert(CommentVo comment, HttpServletRequest request){
+		String boardname = getBoardName(request);
+		service.commentInsert(comment, boardname);
+		return "redirect:/board/"+getBoardName(request)+"/read?num="+comment.getBoardnum();
 	}
 	
 	public String getBoardName(HttpServletRequest request){

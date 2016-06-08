@@ -28,7 +28,7 @@
 	</c:choose>
 	</h1>
 
-	<div id="currPageTotalPage">${requestScope.pageNation.currPage}/
+	<div class="currPageTotalPage">${requestScope.pageNation.currPage}/
 		${requestScope.pageNation.totalPages}</div>
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
@@ -52,7 +52,7 @@
 
 	</table>
 
-	<div id="btnArea">
+	<div class="btnArea">
 		<button id="writeBtn" class="next btn btn-primary" type="button">글쓰기</button>
 	</div>
 
@@ -63,9 +63,10 @@
 				<!-- 이전 -->
 				<c:choose>
 					<c:when test="${requestScope.pageNation.leftMore==true}">
-						<li class="page-item"><a class="page-link"
-							href="../${requestScope.boardname}/list?pg=${requestScope.pageNation.linkBegin-1}&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						<li class="page-item"><a class="page-link" 
+						href="../${requestScope.boardname}/list?pg=${requestScope.pageNation.linkBegin-1}
+							<c:if test="${requestScope.search.keyword!=null}">&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}</c:if>
+							" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								<span class="sr-only">Previous</span>
 						</a></li>
 					</c:when>
@@ -83,13 +84,16 @@
 					<c:choose>
 						<c:when test="${requestScope.pageNation.currPage==i}">
 							<li class="page-item active">
-							<a class="page-link" href="../${requestScope.boardname}/list?pg=${i}&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}">${i}<span
-									class="sr-only">(current)</span></a></li>
+							<a class="page-link" href="../${requestScope.boardname}/list?pg=${i}
+							<c:if test="${requestScope.search.keyword!=null}">&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}</c:if>
+							">${i}<span class="sr-only">(current)</span></a></li>
 						</c:when>
 
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="../${requestScope.boardname}/list?pg=${i}&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}">${i}</a></li>
+								href="../${requestScope.boardname}/list?pg=${i}
+								<c:if test="${requestScope.search.keyword!=null}">&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}</c:if>
+								">${i}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -97,9 +101,10 @@
 				<c:choose>
 					<c:when test="${requestScope.pageNation.rightMore==true}">
 						<li class="page-item"><a class="page-link"
-							href="../${requestScope.boardname}/list?pg=${requestScope.pageNation.linkEnd+1}&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-								class="sr-only">Next</span>
+							href="../${requestScope.boardname}/list?pg=${requestScope.pageNation.linkEnd+1}
+							<c:if test="${requestScope.search.keyword!=null}">&type=${requestScope.search.type}&keyword=${requestScope.search.keyword}</c:if>
+							" aria-label="Next"> <span aria-hidden="true">&raquo;</span> 
+							<span class="sr-only">Next</span>
 						</a></li>
 					</c:when>
 					<c:otherwise>

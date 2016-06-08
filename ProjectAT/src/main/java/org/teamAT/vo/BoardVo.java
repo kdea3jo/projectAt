@@ -13,7 +13,6 @@ public class BoardVo {
 	private int totalpage;
 	private int hit;
 	
-	
 	public int getHit() {
 		return hit;
 	}

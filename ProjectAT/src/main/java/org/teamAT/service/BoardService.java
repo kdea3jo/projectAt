@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.teamAT.dao.BoardDao;
 import org.teamAT.vo.BoardVo;
+import org.teamAT.vo.CommentVo;
 import org.teamAT.vo.PageVo;
 import org.teamAT.vo.SearchVo;
 
@@ -26,7 +27,6 @@ public class BoardService {
 			
 			SearchVo search = new SearchVo();
 			search.setType(request.getParameter("type"));
-			
 			search.setKeyword(request.getParameter("keyword"));
 			
 			int rowsPerScreen = 10;
@@ -58,6 +58,37 @@ public class BoardService {
 		BoardDao dao=sqlSessionTemplate.getMapper(BoardDao.class);
 		int num = Integer.parseInt(request.getParameter("num"));
 		request.setAttribute("content", dao.getContent(num, boardName));
+		
+		String sPage = request.getParameter("pg");
+		int page=0;
+		if(sPage==null || sPage.equals("")) page=1;
+		else page = Integer.parseInt(sPage);
+		
+		
+		int rowsPerScreen = 10;
+		int linksPerScreen = 5;
+		
+		List<CommentVo> list = dao.commentList(num,boardName, page);
+		
+		PageVo pagination = new PageVo();
+		int totalpage=0;
+		if(list.size()!=0){
+			totalpage = list.get(0).getTotalpage();
+	    }
+		int linkGroup = (page-1)/linksPerScreen+1;
+		int linkEnd = linkGroup*linksPerScreen;
+		int linkBegin = linkEnd-linksPerScreen+1;
+		if(linkEnd>totalpage)linkEnd= totalpage;
+		
+		pagination.setTotalPages(totalpage);
+		pagination.setCurrPage(page);
+		pagination.setLeftMore(linkGroup!=1? true:false);
+		pagination.setRightMore(linkEnd<totalpage? true:false);
+		pagination.setLinkBegin(linkBegin);
+		pagination.setLinkEnd(linkEnd);
+		request.setAttribute("commentList", list);
+		
+		request.setAttribute("commentPage", pagination);
 	}
 	
 	public void insert(BoardVo board, String boardName) {
@@ -124,6 +155,11 @@ public class BoardService {
 		
 		request.setAttribute("pageNation", pagination);
 		request.setAttribute("boardList", list);
+	}
+
+	public boolean commentInsert(CommentVo comment, String boardname) {
+		BoardDao dao=sqlSessionTemplate.getMapper(BoardDao.class);
+		return dao.commentInsert(comment, boardname);		
 	}
 
 }

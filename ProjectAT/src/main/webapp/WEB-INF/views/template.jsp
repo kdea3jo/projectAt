@@ -14,7 +14,7 @@
 		.footer, .push {height: 3em;}
 		.footer{background-color: #D5D5D5;}
 		.tableArea, .writeFormArea{width: 60%;margin: 0px auto;}
-    	#btnArea, #currPageTotalPage{margin: 10px auto;text-align: right;}
+    	.btnArea, .currPageTotalPage{margin: 10px auto;text-align: right;}
       	.navArea{margin: 0px auto;text-align: center;}
     </style>
  	

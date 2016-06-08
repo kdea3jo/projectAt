@@ -42,9 +42,8 @@ public class MemberController {
 
 	@ResponseBody
 	@RequestMapping(value = "join", method = RequestMethod.POST)
-	public boolean join(MemberVo vo) throws ParseException {
-		System.out.println("±×³É");
-		/*boolean result = ms.join(request);*/
+	public boolean join(HttpServletRequest request) throws ParseException {
+		boolean result = ms.join(request);
 		return false;
 	}
 

@@ -21,12 +21,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="insert">
-    	INSERT INTO ${boardname} VALUES (${boardname}num.NEXTVAL, 'manager' , #{board.title},#{board.content},SYSDATE, 0, #{board.ref})
+    	INSERT INTO ${boardname} VALUES (${boardname}num.NEXTVAL, #{board.userid} , #{board.title},#{board.content},SYSDATE, 0, #{board.ref})
     </insert>
     
     <select id="getCurrentContent" resultType="org.teamAT.vo.BoardVo">
     	SELECT * FROM ${boardname} 
-		WHERE NUM=(SELECT MAX(NUM) FROM ${boardname} WHERE USERID='manager')
+		WHERE NUM=(SELECT MAX(NUM) FROM ${boardname} WHERE USERID=#{userid})
     </select>
     
     <update id="update">
@@ -36,5 +36,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="delete">
     	DELETE FROM ${boardname} WHERE num=#{num}
     </delete>
+    
+    <insert id="commentInsert">
+    	INSERT INTO ${boardname}comment VALUES 
+    	( ${boardname}commentnum.NEXTVAL, #{comment.userid}, #{comment.content}, #{comment.boardnum}, SYSDATE)
+    </insert>
+    
+    <select id="commentList" resultType="org.teamAT.vo.CommentVo">
+	    SELECT * FROM(    
+		    SELECT TRUNC((RN-1)/5+1) AS page, CEIL(COUNT(*) OVER()/5) AS TotalPage,t2.* FROM(
+		      SELECT ROWNUM RN, t1.* FROM(
+		        SELECT * FROM ${boardname}COMMENT 
+		        WHERE BOARDNUM=#{num}
+		        ORDER BY NUM
+		      )t1
+		    )t2
+		)WHERE page=#{page}
+    </select>
     
  </mapper>

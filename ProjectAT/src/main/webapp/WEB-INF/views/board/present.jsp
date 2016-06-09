@@ -27,7 +27,7 @@
 	
 </script>
 <style>
-	#graph {width: 700px;height:500px;}
+	#graph {width: 700px;height:100px;}
 
 	#graph > p {position:relative;display:inline-block;float:left;font-weight:bold;color:#fff;font-size:13px;text-align: center}
 	#graph > p strong {position:absolute;bottom:-20px;display:block;width:100%;text-align:center;color:#777;}
@@ -35,6 +35,8 @@
 	#graph > p:nth-child(1) {height:30px;background:#337AB7;}
 	#graph > p:nth-child(2) {height:30px;background:#FB5175;}
 	#graph > p:nth-child(3) {height:30px;background:#dddddd;}
+	
+	.calendar {width: 500px}
 	
 </style>
 <h1>출결현황</h1>
@@ -56,10 +58,64 @@
 	<p class="graph03 graph"><em></em><strong></strong></p>
 </div>
 
-<div id="disqus_thread"></div>
-	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!--달력  -->
+
+<div ng-app="myApp" ng-controller="MyCtrl" class="calendar">
+    <div rm-datepicker ng-model="oDate1" rm-config="rmConfig1"></div>
+    <div>Selected date: {{oDate1 | date: 'yyyy-MM-dd'}}</div>
+    <hr>
+    <input rm-datepicker type="text" ng-model="oDate2" rm-config="rmConfig2">
+    <br>
+
+</div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<!--<script src="http://fian.my.id/Waves/static/waves.min.js?v=0.7.4"></script>-->
+<script src='<c:url value="/resources/calendar/rm-datepicker.js"/>'></script>
+<!--<script src="dist/rm-datepicker.min.js"></script>-->
+<script>
 
+    var app = angular.module("myApp", ["rmDatepicker"]);
 
+    /* Datepicker global configuration */
+    app.config(["rmDatepickerConfig", function (rmDatepickerConfig) {
+        rmDatepickerConfig.mondayStart = true;
+        rmDatepickerConfig.initState = "month";
+    }]);
 
+</script>
+<script>
+
+    (function () {
+
+        var app = angular.module("myApp");
+
+        var MyCtrl = function ($scope) {
+
+            /* Datepicker local configuration */
+            $scope.rmConfig1 = {
+                mondayStart: false,
+                initState: "month", /* decade || year || month */
+                maxState: null,
+                minState: "month",
+                decadeSize: 12,
+                monthSize: 42, /* "auto" || fixed nr. (35 or 42) */
+                min: new Date('2000-11-21'),
+                max: new Date('2023-11-21'),
+                format: "yyyy-MM-dd" /* https://docs.angularjs.org/api/ng/filter/date */
+            };
+
+            $scope.rmConfig2 = { format: "d MMM yyyy" };
+
+            $scope.oDate1 = new Date('2015-12-12');
+            $scope.oDate2 = new Date();
+        };
+        app.controller("MyCtrl", ['$scope', MyCtrl]);
+
+    }());
+
+    // Init waves (OPTIONAL) :)
+    // window.onload = Waves.init();
+
+</script>

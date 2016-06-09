@@ -1,21 +1,24 @@
 package org.teamAT.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Random;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.teamAT.dao.MemberDao;
 import org.teamAT.vo.MemberVo;
 
-public class MemberService {
+public class MemberService{
 
-
+	@Autowired
+	protected JavaMailSender mailSender;
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	@Autowired
@@ -30,23 +33,18 @@ public class MemberService {
         return vo;
 	}
 	
-	public boolean join(HttpServletRequest request) throws ParseException {
+	public String getUserName(String id){
 		MemberDao dao=sqlSessionTemplate.getMapper(MemberDao.class);
-		
-		/*컨트롤러에서 자동 매핑이 안되서 수동으로 처리함*/
-		MemberVo vo=new MemberVo();
-		vo.setUserid(request.getParameter("userid"));
-		vo.setUserpw(passwordEncoder.encode(request.getParameter("userpw")));
-		vo.setUsername(request.getParameter("username"));
-		vo.setPhone(Integer.parseInt(request.getParameter("phone")));
-		SimpleDateFormat date=new SimpleDateFormat("yy-MM-dd");
-		Date d=date.parse(request.getParameter("birthday"));
-		vo.setBirthday(d);
+		return dao.getUserName(id);
+	}
+	
+	public void join(MemberVo vo) {
+		MemberDao dao=sqlSessionTemplate.getMapper(MemberDao.class);
+		System.out.println(vo.getUserpw());
+		vo.setUserpw(passwordEncoder.encode(vo.getUserpw()));
 		vo.setGrade("member");
-		
-		int result=dao.setMember(vo);
-		
-		return result>=1? true:false;
+		System.out.println("여기까진..");
+		dao.setMember(vo);
 	}
 	
 	public boolean checkPw(String pw, HttpServletRequest request){
@@ -56,5 +54,47 @@ public class MemberService {
             return true;
         }   
 		return false;
+	}
+	
+	public MemberVo getUserId(MemberVo vo) {
+		MemberDao dao=sqlSessionTemplate.getMapper(MemberDao.class);	
+		vo.setUserid(dao.getUserId(vo));
+		return vo;
+	}
+	
+	public boolean sendEmailToCreateNewPassword(String email) {
+		MemberDao dao=sqlSessionTemplate.getMapper(MemberDao.class);	
+		
+		String pw=createRandomPassword();
+		int result=dao.resetPassword(email,passwordEncoder.encode(pw));
+		if(result<1) return false;
+		
+		MimeMessage msg=mailSender.createMimeMessage();		
+		try {
+			msg.setFrom("admin@projectat.co.kr");
+			msg.setSubject("[AT출결관리시스템]임시 비밀번호 입니다.");
+			msg.setText("임시 비밀번호는 ["+pw+"]입니다.\n"
+					+ "로그인 페이지로 이동>>> http://192.168.8.30:8000/ProjectAT/member/loginform");
+            msg.setRecipient(RecipientType.TO , new InternetAddress(email));
+            mailSender.send(msg);
+            return true;
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public String createRandomPassword(){
+		Random rnd =new Random();
+		StringBuffer buf =new StringBuffer();
+		 
+		for(int i=0;i<20;i++){
+		    if(rnd.nextBoolean()){
+		        buf.append((char)((int)(rnd.nextInt(26))+97));
+		    }else{
+		        buf.append((rnd.nextInt(10))); 
+		    }
+		}
+		return buf.toString();
 	}
 }

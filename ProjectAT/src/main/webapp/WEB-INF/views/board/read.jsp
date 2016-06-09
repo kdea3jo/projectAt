@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
 <script type="text/javascript">
 $(function() {
@@ -125,7 +127,7 @@ $(function() {
 		</div>
 	<form id="commentForm" action="comment" method="post">
 			<label for="commentUserid" >작성자</label>
-			<span id="commentUserid"><input name="userid" type="text" class="sr-only" value="${sessionScope.id}"></input>${sessionScope.id}</span><br>
+			<span id="commentUserid"><input name="userid" type="text" class="sr-only" value="<sec:authentication property="principal"/>"></input><sec:authentication property="principal"/></span><br>
 			<label for="commentContent" class="sr-only">내용</label>
 			<textarea id="commentContent" name="content" class="form-control" rows="3"></textarea>
 			<input name="boardnum" value="${requestScope.content.num}" class="sr-only">

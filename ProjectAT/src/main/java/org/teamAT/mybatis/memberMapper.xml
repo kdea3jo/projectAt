@@ -6,10 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMember" resultType="org.teamAT.vo.MemberVo">
         select * from member where userid=#{id}
     </select>
+    <select id="getUserName" resultType="String">
+        select username from member where userid=#{id}
+    </select>
+    <select id="getUserId" parameterType="org.teamAT.vo.MemberVo" resultType="String">
+        select userid from member where username=#{username} and phone=#{phone}
+    </select>
     <insert id="setMember" parameterType="org.teamAT.vo.MemberVo">
     	insert into member(userid,userpw,username,phone,birthday,grade) values(#{userid},#{userpw},#{username},#{phone},#{birthday},#{grade})
     </insert>
     <select id="getPassword" resultType="String">
         select userpw from member where userid=#{id}
     </select>
+    <update id="resetPassword">
+    	update member set userpw=#{pw} where userid=#{id}
+    </update>
 </mapper>

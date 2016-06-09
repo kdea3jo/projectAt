@@ -44,7 +44,7 @@
             login-processing-url="/check"
             username-parameter="id"
             password-parameter="pw"
-            default-target-url="/main"
+            default-target-url="/member/loginsuccess"
             authentication-failure-url="/member/loginform?error=true" />
         <logout logout-success-url="/member/loginform" />
         <csrf disabled="true"/>
@@ -57,4 +57,22 @@
     <authentication-manager>
         <authentication-provider ref="customAuthenticationProvider"  />
     </authentication-manager> 
+    
+    <!-- for Email Service -->
+	<beans:bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+	    <beans:property name="host" value="smtp.gmail.com" />
+	    <beans:property name="port" value="25" />
+	    <beans:property name="username" value="soloist.by.kazal@gmail.com" />
+	    <beans:property name="password" value="8647712a" />
+	    <beans:property name="defaultEncoding" value="utf-8"/>
+	    <beans:property name="javaMailProperties">
+	        <beans:props>
+	            <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+	                <beans:prop key="mail.transport.protocol">smtp</beans:prop>
+	            <beans:prop key="mail.smtp.auth">true</beans:prop>
+	            <beans:prop key="mail.debug">true</beans:prop>
+	        </beans:props>
+	    </beans:property>
+	</beans:bean>
+	
 </beans:beans>

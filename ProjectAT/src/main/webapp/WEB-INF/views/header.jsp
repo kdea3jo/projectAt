@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
@@ -24,12 +25,12 @@
 			
 			<ul class="nav navbar-nav navbar-right">
 				<c:choose>
-					<c:when test="${sessionScope.id==null}">
+					<c:when test="${sessionScope.name==null}">
 						<li><a href="/ProjectAT/member/loginform">로그인</a></li>
 						<li><button class="btn btn-primary btn-sm navbar-btn" onclick="location.href='/ProjectAT/member/joinform'" type="button">회원가입</button></li>
 					</c:when>
 					<c:otherwise>
-						<li><a><strong>${sessionScope.id}</strong>님 반갑습니다.</a></li>
+						<li><a><strong>${sessionScope.name}</strong>님 반갑습니다.</a></li>
 						<li><a href="/ProjectAT/member/mypage">마이페이지</a></li>
 						<li><a href="/ProjectAT/logout">로그아웃</a></li>
 					</c:otherwise>		

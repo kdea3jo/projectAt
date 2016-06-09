@@ -41,6 +41,7 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="*/insert", method=RequestMethod.POST)
 	public int insert(BoardVo board, HttpServletRequest request){
+		System.out.println(board.getUserid());
 		service.insert(board,getBoardName(request));
 		return service.getCurrentContent(board,getBoardName(request)).getNum();
 	}

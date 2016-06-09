@@ -35,9 +35,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 		String id=(String)authentication.getPrincipal();
         String pw=(String)authentication.getCredentials();
         
-        System.out.println(id);
         MemberVo vo=ms.loadUserByUsername(id);
-        
         SimpleGrantedAuthority auth=new SimpleGrantedAuthority(vo.getGrade());
         List<GrantedAuthority> list=new ArrayList();
         list.add(auth);
@@ -45,7 +43,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
         if(!passwordEncoder.matches(pw, vo.getUserpw())){
             throw new BadCredentialsException("패스워드가 일치하지 않습니다.");
         }
-        return new UsernamePasswordAuthenticationToken(id, pw, list);
+        return new UsernamePasswordAuthenticationToken(vo.getUserid(), null, list);
 	}
 }
 

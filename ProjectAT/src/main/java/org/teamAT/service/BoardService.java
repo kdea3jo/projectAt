@@ -58,7 +58,6 @@ public class BoardService {
 		BoardDao dao=sqlSessionTemplate.getMapper(BoardDao.class);
 		int num = Integer.parseInt(request.getParameter("num"));
 		request.setAttribute("content", dao.getContent(num, boardName));
-		
 		String sPage = request.getParameter("pg");
 		int page=0;
 		if(sPage==null || sPage.equals("")) page=1;
@@ -68,7 +67,7 @@ public class BoardService {
 		int rowsPerScreen = 10;
 		int linksPerScreen = 5;
 		
-		List<CommentVo> list = dao.commentList(num,boardName, page);
+		List<CommentVo> list = dao.commentList(num,boardName,page);
 		
 		PageVo pagination = new PageVo();
 		int totalpage=0;

@@ -71,6 +71,15 @@ public class BoardController {
 		service.commentInsert(comment, boardname);
 		return "redirect:/board/"+getBoardName(request)+"/read?num="+comment.getBoardnum();
 	}
+	@RequestMapping(value="*/present", method = RequestMethod.GET)
+	public String present(HttpServletRequest request){
+		return "/board/notice/present";
+	}
+	
+	@RequestMapping(value="calendar", method = RequestMethod.GET)
+	public String calendar(HttpServletRequest request){
+		return "/calendar/calendar";
+	}
 	
 	public String getBoardName(HttpServletRequest request){
 		String[] temp = request.getRequestURI().split("/");

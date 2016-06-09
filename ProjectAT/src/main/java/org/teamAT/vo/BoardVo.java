@@ -9,10 +9,17 @@ public class BoardVo {
 	private String title;
 	private String content;
 	private Date wDate;
+	private String username;
 	private int ref;
 	private int totalpage;
 	private int hit;
 	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public int getHit() {
 		return hit;
 	}

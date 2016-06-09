@@ -13,7 +13,6 @@
 			$("#searchBtn").on("click",function(){
 				var type = $("#searchForm div select").val();
 				var keyword = $("#searchForm div input").val();
-				
 				location.href="list?type="+type+"&keyword="+keyword;
 			});
 		});
